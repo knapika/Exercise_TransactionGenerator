@@ -1,6 +1,7 @@
 Komendy do wykonania:
 
 gradle build
+
 gradle shadowJar
 
 Tutaj jakieś przykładowe dane (nie podawałem katalogu wyjściowego) :
