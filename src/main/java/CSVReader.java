@@ -17,15 +17,16 @@ public class CSVReader {
                 Item item = new Item(itemPara[0], Double.valueOf(itemPara[1]));
                 itemsList.add(item);
             }
+            Item[] itemsArray = new Item[itemsList.size()];
+            itemsList.toArray(itemsArray);
+            return itemsArray;
+        } catch (AccessDeniedException e1) {
+            e1.printStackTrace();;
+        } catch (FileNotFoundException e2) {
+            e2.printStackTrace();
         } catch (IOException e) {
-           if(e.getClass() == AccessDeniedException.class) {
-               System.out.println("Brak dostępu do pliku!");
-           } else if(e.getClass() == NoSuchFileException.class) {
-               System.out.println("Podany plik nie istnieje!");
-           }
+            e.printStackTrace();
         }
-        Item[] itemsArray = new Item[itemsList.size()];
-        itemsList.toArray(itemsArray);
-        return itemsArray;
+        return null;
     }
 }
