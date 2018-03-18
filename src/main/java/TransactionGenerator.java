@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class TransactionGenerator {
@@ -14,7 +15,7 @@ public class TransactionGenerator {
         this.JsonWriter = new TransactionJSONFileWriter(transactionConfiguration.getOurDir());
     }
 
-    public void readItemsFromCSVFile () {
+    public void readItemsFromCSVFile () throws IOException {
         availableItemsArray = reader.readItemsFromFile(transactionConfiguration.getFileWithItem());
     }
 

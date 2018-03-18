@@ -11,7 +11,7 @@ import static org.assertj.core.api.Fail.fail;
 
 public class CSVReaderTest {
 
-    
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -36,13 +36,5 @@ public class CSVReaderTest {
         // when
         uut.readItemsFromFile("items2.csv");
     }
-
-    @Test(expected = AccessDeniedException.class)
-    public void lackOfPermision() throws IOException {
-        // given
-        CSVReader uut = new CSVReader();
-
-        // when
-        uut.readItemsFromFile("items.csv");
-    }
+    
 }
