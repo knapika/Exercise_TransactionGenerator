@@ -3,6 +3,7 @@ public class MainClass {
         CmdParser cmdParser = new CmdParser();
         TransactionConfiguration configuration = cmdParser.parse(args);
         TransactionGenerator generator = new TransactionGenerator(configuration);
+        generator.readItemsFromCSVFile();
         generator.generateAndSaveTransactions();
     }
 }

@@ -1,4 +1,8 @@
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.io.*;
+import java.nio.file.AccessDeniedException;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +17,12 @@ public class CSVReader {
                 Item item = new Item(itemPara[0], Double.valueOf(itemPara[1]));
                 itemsList.add(item);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+           if(e.getClass() == AccessDeniedException.class) {
+               System.out.println("Brak dostępu do pliku!");
+           } else if(e.getClass() == NoSuchFileException.class) {
+               System.out.println("Podany plik nie istnieje!");
+           }
         }
         Item[] itemsArray = new Item[itemsList.size()];
         itemsList.toArray(itemsArray);

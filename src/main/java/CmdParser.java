@@ -1,5 +1,6 @@
 import org.apache.commons.cli.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -50,8 +51,14 @@ public class CmdParser {
             }
             if (cmd.hasOption("outDir")) {
                 outDir = cmd.getOptionValue("outDir");
+                File dir = new File(outDir);
+                if(!dir.exists()) {
+                    throw new Exception("Podany katalog nie istnieje!");
+                }
             }
         } catch (ParseException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         TransactionConfiguration transactionConfiguration = new TransactionConfiguration(rangeOfCustomerId, rangeOfDate,
                 fileWithItem, rangeOfnumberOfItems, rangeOfQuantities, numberOfTrans, outDir);

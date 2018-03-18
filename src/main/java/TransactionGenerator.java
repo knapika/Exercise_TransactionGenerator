@@ -14,9 +14,12 @@ public class TransactionGenerator {
         this.JsonWriter = new TransactionJSONFileWriter(transactionConfiguration.getOurDir());
     }
 
+    public void readItemsFromCSVFile () {
+        availableItemsArray = reader.readItemsFromFile(transactionConfiguration.getFileWithItem());
+    }
+
     public Boolean generateAndSaveTransactions () {
         int numberOfTrans = Integer.valueOf(transactionConfiguration.getNumberOfTrans());
-        availableItemsArray = reader.readItemsFromFile(transactionConfiguration.getFileWithItem());
 
         for(int i = 0; i < numberOfTrans; i++) {
             int customerId = randomsGenerator.getIntegerFromString(transactionConfiguration.getRangeOfCustomerId());
