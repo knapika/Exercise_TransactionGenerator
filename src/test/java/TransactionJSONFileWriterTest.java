@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -32,5 +33,16 @@ public class TransactionJSONFileWriterTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void writeWithNull() {
+        //given
+        TransactionJSONFileWriter uut = new TransactionJSONFileWriter(".");
+        String jsonString = gson.toJson(transaction);
+        //when
+        boolean done = uut.write(transaction, null);
+        //then
+        Assert.assertTrue(done);
     }
 }

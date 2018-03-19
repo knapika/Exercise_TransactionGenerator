@@ -16,7 +16,7 @@ public class TransactionJSONFileWriter {
         this.dir = dir;
     }
 
-    public void write(Transaction tran, BufferedWriter writerBuff) {
+    public boolean write(Transaction tran, BufferedWriter writerBuff) {
         String path = dir + "/transaction" + tran.getId() + ".json";
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         BufferedWriter writer = null;
@@ -29,8 +29,10 @@ public class TransactionJSONFileWriter {
             }
             writer.write(jsonInString);
             writer.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }
