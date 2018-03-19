@@ -15,17 +15,21 @@ public class TransactionJSONFileWriter {
         this.dir = dir;
     }
 
-    public void write(Transaction tran) {
+    public void write(Transaction tran, BufferedWriter writerBuff) {
         String path = dir + "/transaction" + tran.getId() + ".json";
         Gson gson = new Gson();
+        BufferedWriter writer = null;
         try {
             String jsonInString = gson.toJson(tran);
-            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+            if(writerBuff == null){
+                writer = new BufferedWriter(new FileWriter(path));
+            } else {
+                writer = writerBuff;
+            }
             writer.write(jsonInString);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
