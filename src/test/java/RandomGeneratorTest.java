@@ -7,19 +7,6 @@ import java.time.LocalTime;
 
 public class RandomGeneratorTest {
     @Test
-    public void getIntegerFromString() {
-        //given
-        RandomsGenerator uut = new RandomsGenerator();
-        String range = "1:20";
-
-        //when
-        int randomValue = uut.getIntegerFromString(range);
-
-        //then
-        Assert.assertTrue(1 <= randomValue && randomValue <= 20);
-    }
-
-    @Test
     public void getIntegerFromRange() {
         //given
         RandomsGenerator uut = new RandomsGenerator();

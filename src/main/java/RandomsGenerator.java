@@ -6,12 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomsGenerator {
-    int getIntegerFromString(String rangeOfInt) {
-        String[] range = rangeOfInt.split(":");
-        int randomNum = ThreadLocalRandom.current().nextInt(Integer.valueOf(range[0]), Integer.valueOf(range[1]) + 1);
-        return randomNum;
-    }
-
     int getInteger(int a, int b) {
         int randomNum = ThreadLocalRandom.current().nextInt(a, b);
         return randomNum;
