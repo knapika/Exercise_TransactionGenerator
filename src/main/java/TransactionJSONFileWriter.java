@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -17,7 +18,7 @@ public class TransactionJSONFileWriter {
 
     public void write(Transaction tran, BufferedWriter writerBuff) {
         String path = dir + "/transaction" + tran.getId() + ".json";
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();;
         BufferedWriter writer = null;
         try {
             String jsonInString = gson.toJson(tran);

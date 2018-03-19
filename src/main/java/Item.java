@@ -30,9 +30,9 @@ public class Item {
     @Override
     public String toString() {
         return "{" +
-                "\"name\": " + name  +
-                ",\"quantity\": " + quantity +
-                ", \"price\": " + price +
-                "  }";
+                "name: " + name  +
+                ",quantity:"  + quantity +
+                ",price:"  + price +
+                "}";
     }
 }
