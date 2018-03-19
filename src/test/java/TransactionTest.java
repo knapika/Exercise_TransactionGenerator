@@ -5,8 +5,44 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class TransactionTest {
+    private LocalDateTime now = LocalDateTime.now();
+
     @Test
-    public void getInfos() {
+    public void getId() {
+        //given
+        Item[] i = {new Item("jabłko", 5, 1.5)};
+        Transaction uut = new Transaction(2,5, now, i, 555.123123);
+        //when
+
+        //then
+        Assert.assertTrue(uut.getId() == 2);
+
+    }
+
+    @Test
+    public void getCustoreId() {
+        //given
+        Item[] i = {new Item("jabłko", 5, 1.5)};
+        Transaction uut = new Transaction(2,5, now, i, 555.123123);
+        //when
+
+        //then
+        Assert.assertTrue(uut.getCustomerId() == 5);
+    }
+
+    @Test
+    public void getSum() {
+        //given
+        Item[] i = {new Item("jabłko", 5, 1.5)};
+        Transaction uut = new Transaction(2,5, now, i, 555.123123);
+        //when
+
+        //then
+        Assert.assertTrue(uut.getSum().equals(new BigDecimal(555.123123).setScale(2, BigDecimal.ROUND_HALF_UP)));
+    }
+
+    @Test
+    public void getDate() {
         //given
         LocalDateTime now = LocalDateTime.now();
         Item[] i = {new Item("jabłko", 5, 1.5)};
@@ -14,10 +50,16 @@ public class TransactionTest {
         //when
 
         //then
-        Assert.assertTrue(uut.getId() == 2);
-        Assert.assertTrue(uut.getCustomerId() == 5);
-        Assert.assertTrue(uut.getSum().equals(new BigDecimal(555.123123).setScale(2, BigDecimal.ROUND_HALF_UP)));
         Assert.assertTrue(uut.getDate().equals(uut.getDate()));
+    }
+    @Test
+    public void getInfos() {
+        //given
+        Item[] i = {new Item("jabłko", 5, 1.5)};
+        Transaction uut = new Transaction(2,5, now, i, 555.123123);
+        //when
+
+        //then
         Assert.assertTrue(uut.getListOfItems().equals(i));
     }
 }

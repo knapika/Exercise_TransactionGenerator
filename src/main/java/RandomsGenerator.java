@@ -43,11 +43,11 @@ public class RandomsGenerator {
         int nano;
         if(start.toLocalDate().equals(newDate) && end.toLocalDate().equals(newDate)) {
             hour = ThreadLocalRandom.current().nextInt(start.getHour() + 1, end.getHour());
-        } else if(start.toLocalDate().equals(newDate) && !end.toLocalDate().equals(newDate)) {
+        }else if(start.toLocalDate().equals(newDate) && !end.toLocalDate().equals(newDate)) {
             hour = ThreadLocalRandom.current().nextInt(start.getHour() + 1, 24);
-        } else if(!start.toLocalDate().equals(newDate) && end.toLocalDate().equals(newDate)) {
+        }else if(!start.toLocalDate().equals(newDate) && end.toLocalDate().equals(newDate)) {
             hour = ThreadLocalRandom.current().nextInt(0, end.getHour());
-        } else {
+        }else {
             hour = ThreadLocalRandom.current().nextInt(0, 24);
         }
         min = ThreadLocalRandom.current().nextInt(0,60);
