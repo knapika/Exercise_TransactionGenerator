@@ -27,4 +27,16 @@ public class ItemTest {
         Assert.assertTrue(uut.getPrice() == 1.5);
         Assert.assertTrue(uut.getQuantity() == 0);
     }
+
+    @Test
+    public void testToString() {
+        //given
+        Item uut = new Item("a", 4, 1.5);
+        String exp = "{name: a,quantity:4,price:1.5}";
+        //when
+        String result = uut.toString();
+        //then
+        Assert.assertEquals(exp, result);
+
+    }
 }
