@@ -36,5 +36,4 @@ public class CSVReaderTest {
         // when
         uut.readItemsFromFile("items2.csv");
     }
-    
 }
