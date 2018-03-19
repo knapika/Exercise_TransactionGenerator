@@ -1,28 +1,23 @@
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TransactionGenerator {
     private TransactionConfiguration transactionConfiguration;
-    private final CSVReader reader;
     private final RandomsGenerator randomsGenerator;
     private Item[] availableItemsArray;
-    private final TransactionJSONFileWriter JsonWriter;
-    private final BufferedWriter writer;
 
-    public TransactionGenerator(TransactionConfiguration transactionConfiguration) {
+
+    public TransactionGenerator(TransactionConfiguration transactionConfiguration, Item[] items) {
         this.transactionConfiguration = transactionConfiguration;
-        this.reader = new CSVReader();
+        this.availableItemsArray = items;
         this.randomsGenerator = new RandomsGenerator();
-        this.JsonWriter = new TransactionJSONFileWriter(transactionConfiguration.getOurDir());
-        this.writer = null;
     }
 
-    public void readItemsFromCSVFile () throws IOException {
-        availableItemsArray = reader.readItemsFromFile(transactionConfiguration.getFileWithItem());
-    }
-
-    public Boolean generateAndSaveTransactions () {
+    public List<Transaction> generateTransactions () {
+        List<Transaction> listOfTransactions = new LinkedList<>();
         int numberOfTrans = Integer.valueOf(transactionConfiguration.getNumberOfTrans());
 
         for(int i = 0; i < numberOfTrans; i++) {
@@ -42,9 +37,8 @@ public class TransactionGenerator {
                 sum += itemsInTran[j].getPrice() * quantity;
             }
             Transaction tran = new Transaction(i, customerId, timestemp, itemsInTran, sum);
-
-            JsonWriter.write(tran, writer);
+            listOfTransactions.add(tran);
         }
-        return true;
+        return listOfTransactions;
     }
 }

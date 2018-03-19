@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.List;
 
 public class TransactionJSONFileWriter {
     private final String dir;
@@ -16,19 +17,22 @@ public class TransactionJSONFileWriter {
         this.dir = dir;
     }
 
-    public boolean write(Transaction tran, BufferedWriter writerBuff) {
-        String path = dir + "/transaction" + tran.getId() + ".json";
+    public boolean write(List<Transaction> transactionList, BufferedWriter writerBuff) {
+        String path ="";
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         BufferedWriter writer = null;
         try {
-            String jsonInString = gson.toJson(tran);
-            if(writerBuff == null){
-                writer = new BufferedWriter(new FileWriter(path));
-            } else {
-                writer = writerBuff;
+            for(Transaction tran : transactionList){
+                path = dir + "/transaction" + tran.getId() + ".json";
+                String jsonInString = gson.toJson(tran);
+                if (writerBuff == null) {
+                    writer = new BufferedWriter(new FileWriter(path));
+                } else {
+                    writer = writerBuff;
+                }
+                writer.write(jsonInString);
+                writer.close();
             }
-            writer.write(jsonInString);
-            writer.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
