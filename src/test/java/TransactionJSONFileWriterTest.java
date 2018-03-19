@@ -9,12 +9,18 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TransactionJSONFileWriterTest {
     private LocalDateTime now = LocalDateTime.now();
-    private Transaction transaction = new Transaction(1, 2, LocalDateTime.now(),null, 254.22);
+    private List<Transaction> transactionList = new LinkedList<Transaction>(Arrays.asList(
+            new Transaction(2, 5,LocalDateTime.now(),null, 24.22)));
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     @Mock
     BufferedWriter writer;
     @Rule
@@ -24,12 +30,14 @@ public class TransactionJSONFileWriterTest {
     public void write() {
         //given
         TransactionJSONFileWriter uut = new TransactionJSONFileWriter(".");
-        String jsonString = gson.toJson(transaction);
+        String jsonString_0 = gson.toJson(transactionList.get(0));
+
         //when
-        uut.write(transaction, writer);
+        uut.write(transactionList, writer);
         //then
         try {
-            Mockito.verify(writer, Mockito.times(1)).write(jsonString);
+            Mockito.verify(writer, Mockito.atLeast(1)).write(jsonString_0);
+            Mockito.verify(writer, Mockito.atMost(1)).write(jsonString_0);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,9 +47,9 @@ public class TransactionJSONFileWriterTest {
     public void writeWithNull() {
         //given
         TransactionJSONFileWriter uut = new TransactionJSONFileWriter(".");
-        String jsonString = gson.toJson(transaction);
+
         //when
-        boolean done = uut.write(transaction, null);
+        boolean done = uut.write(transactionList, null);
         //then
         Assert.assertTrue(done);
     }
@@ -50,9 +58,9 @@ public class TransactionJSONFileWriterTest {
     public void wrongDir() throws Exception {
         //given
         TransactionJSONFileWriter uut = new TransactionJSONFileWriter("badDir");
-        String jsonString = gson.toJson(transaction);
+
         //when
-        boolean done = uut.write(transaction, null);
+        boolean done = uut.write(transactionList, null);
         //then
         Assert.assertFalse(done);
     }
