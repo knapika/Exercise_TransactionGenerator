@@ -45,4 +45,15 @@ public class TransactionJSONFileWriterTest {
         //then
         Assert.assertTrue(done);
     }
+
+    @Test
+    public void wrongDir() throws Exception {
+        //given
+        TransactionJSONFileWriter uut = new TransactionJSONFileWriter("badDir");
+        String jsonString = gson.toJson(transaction);
+        //when
+        boolean done = uut.write(transaction, null);
+        //then
+        Assert.assertFalse(done);
+    }
 }
