@@ -18,7 +18,7 @@ public class TransactionJSONFileWriter {
 
     public void write(Transaction tran, BufferedWriter writerBuff) {
         String path = dir + "/transaction" + tran.getId() + ".json";
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();;
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         BufferedWriter writer = null;
         try {
             String jsonInString = gson.toJson(tran);
