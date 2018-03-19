@@ -1,15 +1,16 @@
+import java.util.Arrays;
+
 public class TransactionConfiguration {
-    private final String rangeOfCustomerId;
+    private final int[] rangeOfCustomerId;
     private final String rangeOfDate;
     private final String fileWithItem;
-    private final String rangeOfnumberOfItems;
-    private final String rangeOfQuantities;
-    private final String numberOfTrans;
+    private final int[] rangeOfnumberOfItems;
+    private final int[] rangeOfQuantities;
+    private final int numberOfTrans;
     private final String ourDir;
 
-
-    public TransactionConfiguration(String rangeOfCustomerId, String rangeOfDate, String fileWithItem,
-                                    String rangeOfnumberOfItems, String rangeOfQuantities, String numberOfTrans,
+    public TransactionConfiguration(int[] rangeOfCustomerId, String rangeOfDate, String fileWithItem,
+                                    int[] rangeOfnumberOfItems, int[] rangeOfQuantities, int numberOfTrans,
                                     String ourDir) {
         this.rangeOfCustomerId = rangeOfCustomerId;
         this.rangeOfDate = rangeOfDate;
@@ -27,20 +28,16 @@ public class TransactionConfiguration {
 
         TransactionConfiguration that = (TransactionConfiguration) o;
 
-        if (rangeOfCustomerId != null ? !rangeOfCustomerId.equals(that.rangeOfCustomerId) : that.rangeOfCustomerId != null)
-            return false;
+        if (numberOfTrans != that.numberOfTrans) return false;
+        if (!Arrays.equals(rangeOfCustomerId, that.rangeOfCustomerId)) return false;
         if (rangeOfDate != null ? !rangeOfDate.equals(that.rangeOfDate) : that.rangeOfDate != null) return false;
         if (fileWithItem != null ? !fileWithItem.equals(that.fileWithItem) : that.fileWithItem != null) return false;
-        if (rangeOfnumberOfItems != null ? !rangeOfnumberOfItems.equals(that.rangeOfnumberOfItems) : that.rangeOfnumberOfItems != null)
-            return false;
-        if (rangeOfQuantities != null ? !rangeOfQuantities.equals(that.rangeOfQuantities) : that.rangeOfQuantities != null)
-            return false;
-        if (numberOfTrans != null ? !numberOfTrans.equals(that.numberOfTrans) : that.numberOfTrans != null)
-            return false;
+        if (!Arrays.equals(rangeOfnumberOfItems, that.rangeOfnumberOfItems)) return false;
+        if (!Arrays.equals(rangeOfQuantities, that.rangeOfQuantities)) return false;
         return ourDir != null ? ourDir.equals(that.ourDir) : that.ourDir == null;
     }
 
-    public String getRangeOfCustomerId() {
+    public int[] getRangeOfCustomerId() {
         return rangeOfCustomerId;
     }
 
@@ -52,15 +49,15 @@ public class TransactionConfiguration {
         return fileWithItem;
     }
 
-    public String getRangeOfnumberOfItems() {
+    public int[] getRangeOfnumberOfItems() {
         return rangeOfnumberOfItems;
     }
 
-    public String getRangeOfQuantities() {
+    public int[] getRangeOfQuantities() {
         return rangeOfQuantities;
     }
 
-    public String getNumberOfTrans() {
+    public int getNumberOfTrans() {
         return numberOfTrans;
     }
 
@@ -68,3 +65,5 @@ public class TransactionConfiguration {
         return ourDir;
     }
 }
+
+

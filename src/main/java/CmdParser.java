@@ -19,20 +19,23 @@ public class CmdParser {
         options.addOption("outDir",  true, "Output destination");
     }
 
-    public TransactionConfiguration parse(String[] args) {
-        String rangeOfCustomerId = "1:20";
+    public TransactionConfiguration parse(String[] args) throws Exception {
+        int[] rangeOfCustomerId = {1, 20};
         String rangeOfDate = setDefaultDate();
         String fileWithItem = "";
-        String rangeOfnumberOfItems = "1:5";
-        String rangeOfQuantities = "1:5";
-        String numberOfTrans = "100";
+        int[] rangeOfnumberOfItems = {1, 5};
+        int[] rangeOfQuantities = {1, 5};
+        int numberOfTrans = 100;
         String outDir = ".";
         CommandLineParser parser = new BasicParser();
         CommandLine cmd = null;
         try {
             cmd = parser.parse(options, args);
             if (cmd.hasOption("customerIds")) {
-                rangeOfCustomerId = cmd.getOptionValue("customerIds");
+                rangeOfCustomerId = checkRangeCorrectness(cmd.getOptionValue("customerIds"));
+                if(rangeOfCustomerId == null){
+                    throw new Exception("Zły zakres dla parametru CustomerID");
+                }
             }
             if (cmd.hasOption("dateRange")) {
                 rangeOfDate = cmd.getOptionValue("dateRange");
@@ -41,13 +44,19 @@ public class CmdParser {
                 fileWithItem = cmd.getOptionValue("itemsFile");
             }
             if (cmd.hasOption("itemsCount")) {
-                rangeOfnumberOfItems = cmd.getOptionValue("itemsCount");
+                rangeOfnumberOfItems = checkRangeCorrectness(cmd.getOptionValue("itemsCount"));
+                if(rangeOfnumberOfItems == null){
+                    throw new Exception("Zły zakres dla parametru itemsCount");
+                }
             }
             if (cmd.hasOption("itemsQuantity")) {
-                rangeOfQuantities = cmd.getOptionValue("itemsQuantity");
+                rangeOfQuantities = checkRangeCorrectness(cmd.getOptionValue("itemsQuantity"));
+                if(rangeOfQuantities == null) {
+                    throw new Exception("Zły zakres dla parametru itemsQuantity");
+                }
             }
             if (cmd.hasOption("eventsCount")) {
-                numberOfTrans = cmd.getOptionValue("eventsCount");
+                numberOfTrans = Integer.valueOf(cmd.getOptionValue("eventsCount"));
             }
             if (cmd.hasOption("outDir")) {
                 outDir = cmd.getOptionValue("outDir");
@@ -57,8 +66,6 @@ public class CmdParser {
                 }
             }
         } catch (ParseException e) {
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         TransactionConfiguration transactionConfiguration = new TransactionConfiguration(rangeOfCustomerId, rangeOfDate,
                 fileWithItem, rangeOfnumberOfItems, rangeOfQuantities, numberOfTrans, outDir);
@@ -75,4 +82,10 @@ public class CmdParser {
         return todayStart + ":" + todayEnd.toString();
     }
 
+    private int[] checkRangeCorrectness(String range) {
+        String[] tempString = range.split(":");
+        int[] rangeInt = {Integer.valueOf(tempString[0]), Integer.valueOf(tempString[1])};
+        if(rangeInt[0] <= rangeInt[1]) return rangeInt;
+        else return null;
+    }
 }
