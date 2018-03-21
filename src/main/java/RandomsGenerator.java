@@ -1,17 +1,22 @@
+import org.apache.logging.log4j.LogManager;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Logger;
 
 public class RandomsGenerator {
+    private final org.apache.logging.log4j.Logger RandomsGeneratorLogger = LogManager.getLogger(RandomsGenerator.class);
     int getInteger(int a, int b) {
         int randomNum = ThreadLocalRandom.current().nextInt(a, b);
         return randomNum;
     }
 
     LocalDateTime getTimestamp(String dateRange) {
+        RandomsGeneratorLogger.info("Get random timestamp");
         String[] range = dateRange.split("-0100");
         range[1] = range[1].substring(1);
 

@@ -25,8 +25,10 @@ public class TransactionGenerator {
         int numberOfTrans = Integer.valueOf(transactionConfiguration.getNumberOfTrans());
 
         for(int i = 0; i < numberOfTrans; i++) {
+            TransactionGeneratorLogger.info("Get random customerId");
             int customerId = randomsGenerator.getInteger(transactionConfiguration.getRangeOfCustomerId()[0],
                     transactionConfiguration.getRangeOfCustomerId()[1]);
+            TransactionGeneratorLogger.info("Get random itemsCount");
             int itemsCount = randomsGenerator.getInteger(transactionConfiguration.getRangeOfnumberOfItems()[0],
                     transactionConfiguration.getRangeOfnumberOfItems()[1]);
             LocalDateTime timestemp = randomsGenerator.getTimestamp(transactionConfiguration.getRangeOfDate());
