@@ -40,6 +40,7 @@ public class TransactionGenerator {
                 TransactionGeneratorLogger.info("Get random quantity");
                 int quantity = randomsGenerator.getInteger(transactionConfiguration.getRangeOfQuantities()[0],
                         transactionConfiguration.getRangeOfQuantities()[1]);
+                TransactionGeneratorLogger.info("Create new Item in transaction");
                 itemsInTran[j] =new Item(availableItemsArray[randomItemIndex].getName(), quantity,
                         availableItemsArray[randomItemIndex].getPrice());
                 sum += itemsInTran[j].getPrice() * quantity;
