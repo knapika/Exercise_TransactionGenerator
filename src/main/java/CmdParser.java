@@ -1,12 +1,16 @@
 import org.apache.commons.cli.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 import java.io.File;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 public class CmdParser {
+    private final Logger cmdLogger = LogManager.getLogger(CmdParser.class);
     private Options options = new Options();
 
     public CmdParser() {
@@ -20,8 +24,9 @@ public class CmdParser {
     }
 
     public TransactionConfiguration parse(String[] args) throws Exception {
+        cmdLogger.info("Start reading from CMD");
         int[] rangeOfCustomerId = {1, 20};
-        String rangeOfDate = setDefaultDate();
+        String rangeOfDate ="";
         String fileWithItem = "";
         int[] rangeOfnumberOfItems = {1, 5};
         int[] rangeOfQuantities = {1, 5};
@@ -32,25 +37,27 @@ public class CmdParser {
         try {
             cmd = parser.parse(options, args);
             if (cmd.hasOption("customerIds")) {
-                rangeOfCustomerId = checkRangeCorrectness(cmd.getOptionValue("customerIds"));
+                rangeOfCustomerId = checkRangeCorrectness(cmd.getOptionValue("customerIds"), "customerIds");
                 if(rangeOfCustomerId == null){
                     throw new Exception("Zły zakres dla parametru CustomerID");
                 }
             }
             if (cmd.hasOption("dateRange")) {
                 rangeOfDate = cmd.getOptionValue("dateRange");
+            } else {
+                rangeOfDate = setDefaultDate();
             }
             if (cmd.hasOption("itemsFile")) {
                 fileWithItem = cmd.getOptionValue("itemsFile");
             }
             if (cmd.hasOption("itemsCount")) {
-                rangeOfnumberOfItems = checkRangeCorrectness(cmd.getOptionValue("itemsCount"));
+                rangeOfnumberOfItems = checkRangeCorrectness(cmd.getOptionValue("itemsCount"), "itemsCount");
                 if(rangeOfnumberOfItems == null){
                     throw new Exception("Zły zakres dla parametru itemsCount");
                 }
             }
             if (cmd.hasOption("itemsQuantity")) {
-                rangeOfQuantities = checkRangeCorrectness(cmd.getOptionValue("itemsQuantity"));
+                rangeOfQuantities = checkRangeCorrectness(cmd.getOptionValue("itemsQuantity"), "itemsQuantity");
                 if(rangeOfQuantities == null) {
                     throw new Exception("Zły zakres dla parametru itemsQuantity");
                 }
@@ -62,17 +69,21 @@ public class CmdParser {
                 outDir = cmd.getOptionValue("outDir");
                 File dir = new File(outDir);
                 if(!dir.exists()) {
+                    cmdLogger.error("outDir not exists!");
                     throw new Exception("Podany katalog nie istnieje!");
                 }
             }
         } catch (ParseException e) {
+            cmdLogger.error("ParseException !!!");
         }
+        cmdLogger.info("Create new TransactionConfiguration");
         TransactionConfiguration transactionConfiguration = new TransactionConfiguration(rangeOfCustomerId, rangeOfDate,
                 fileWithItem, rangeOfnumberOfItems, rangeOfQuantities, numberOfTrans, outDir);
         return transactionConfiguration;
     }
 
     private String setDefaultDate() {
+        cmdLogger.info("Set default date");
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
         String todayStart = LocalDate.now().toString() + "T" + LocalTime.of(0,0,0,0)
@@ -82,10 +93,16 @@ public class CmdParser {
         return todayStart + ":" + todayEnd.toString();
     }
 
-    private int[] checkRangeCorrectness(String range) {
+    private int[] checkRangeCorrectness(String range, String paramName) {
         String[] tempString = range.split(":");
         int[] rangeInt = {Integer.valueOf(tempString[0]), Integer.valueOf(tempString[1])};
-        if(rangeInt[0] <= rangeInt[1]) return rangeInt;
-        else return null;
+        if(rangeInt[0] <= rangeInt[1]){
+            cmdLogger.info("Correct range for " + paramName);
+            return rangeInt;
+        }
+        else{
+            cmdLogger.error("Wrong range for " + paramName);
+            return null;
+        }
     }
 }
