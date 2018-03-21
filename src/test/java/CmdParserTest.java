@@ -16,11 +16,12 @@ public class CmdParserTest {
         CmdParser uut = new CmdParser();
         Method method = null;
         int[] result = new int[5];
+        Class[] params = {String.class, String.class};
         try {
             //when
-            method = CmdParser.class.getDeclaredMethod("checkRangeCorrectness", String.class);
+            method = CmdParser.class.getDeclaredMethod("checkRangeCorrectness", params);
             method.setAccessible(true);
-            result = (int[]) method.invoke(uut,"1:20");
+            result = (int[]) method.invoke(uut,"1:20", "xyz");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -38,11 +39,12 @@ public class CmdParserTest {
         CmdParser uut = new CmdParser();
         Method method = null;
         int[] result = new int[5];
+        Class[] params = {String.class, String.class};
         try {
             //when
-            method = CmdParser.class.getDeclaredMethod("checkRangeCorrectness", String.class);
+            method = CmdParser.class.getDeclaredMethod("checkRangeCorrectness", params);
             method.setAccessible(true);
-            result = (int[]) method.invoke(uut,"21:20");
+            result = (int[]) method.invoke(uut,"21:20", "xyz");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -53,7 +55,7 @@ public class CmdParserTest {
         //then
         Assert.assertTrue(result == null);
     }
-    
+
     @Test
     public void defaultDate() {
         //given
@@ -76,7 +78,6 @@ public class CmdParserTest {
         }
         //then
         Assert.assertTrue(result.equals(expectedDate));
-        
     }
 
     @Test
