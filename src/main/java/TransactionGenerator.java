@@ -35,7 +35,9 @@ public class TransactionGenerator {
             Item[] itemsInTran = new Item[itemsCount];
             double sum = 0;
             for(int j = 0; j < itemsCount; j++){
+                TransactionGeneratorLogger.info("Get random Item");
                 int randomItemIndex = randomsGenerator.getInteger(0, availableItemsArray.length);
+                TransactionGeneratorLogger.info("Get random quantity");
                 int quantity = randomsGenerator.getInteger(transactionConfiguration.getRangeOfQuantities()[0],
                         transactionConfiguration.getRangeOfQuantities()[1]);
                 itemsInTran[j] =new Item(availableItemsArray[randomItemIndex].getName(), quantity,
