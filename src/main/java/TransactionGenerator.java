@@ -1,3 +1,6 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -5,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TransactionGenerator {
+    private final Logger TransactionGeneratorLogger = LogManager.getLogger(TransactionGenerator.class);
     private TransactionConfiguration transactionConfiguration;
     private final RandomsGenerator randomsGenerator;
     private Item[] availableItemsArray;
@@ -36,6 +40,7 @@ public class TransactionGenerator {
                         availableItemsArray[randomItemIndex].getPrice());
                 sum += itemsInTran[j].getPrice() * quantity;
             }
+            TransactionGeneratorLogger.info("Create new transaction and add it to list");
             Transaction tran = new Transaction(i, customerId, timestemp, itemsInTran, sum);
             listOfTransactions.add(tran);
         }
