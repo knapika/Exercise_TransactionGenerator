@@ -28,7 +28,7 @@ public class CSVReaderTest {
         Assert.assertEquals(i.length, 9);
     }
 
-    @Test(expected = FileNotFoundException.class)
+    @Test(expected = IOException.class)
     public void fileNotExists() throws IOException {
         // given
         CSVReader uut = new CSVReader();
