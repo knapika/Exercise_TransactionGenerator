@@ -33,8 +33,10 @@ public class JSONWriter implements IWriter {
                 } else {
                     writer = writerBuff;
                 }
+                JSONWriterLogger.debug("Start writing transaction " + tran.getId());
                 writer.write(jsonInString);
                 writer.close();
+                JSONWriterLogger.debug("Transaction " + tran.getId() + " successfully written");
             }
             JSONWriterLogger.info("JSONs have been saved to the file");
             return true;
