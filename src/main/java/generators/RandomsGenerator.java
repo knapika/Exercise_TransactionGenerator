@@ -1,3 +1,5 @@
+package generators;
+
 import org.apache.logging.log4j.LogManager;
 
 import java.time.Duration;
@@ -6,7 +8,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.logging.Logger;
 
 public class RandomsGenerator {
     private final org.apache.logging.log4j.Logger RandomsGeneratorLogger = LogManager.getLogger(RandomsGenerator.class);

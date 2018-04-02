@@ -1,5 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
+import structures.Item;
 
 public class ItemTest {
     @Test

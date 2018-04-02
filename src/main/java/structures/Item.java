@@ -1,3 +1,5 @@
+package structures;
+
 public class Item {
     private final String name;
     private final int quantity;

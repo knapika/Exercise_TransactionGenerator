@@ -1,5 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
+import structures.Item;
+import structures.Transaction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

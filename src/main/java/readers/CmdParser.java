@@ -1,13 +1,15 @@
+package readers;
+
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import structures.TransactionConfiguration;
 
 
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 
 public class CmdParser {
     private final Logger cmdLogger = LogManager.getLogger(CmdParser.class);
@@ -76,7 +78,7 @@ public class CmdParser {
         } catch (ParseException e) {
             cmdLogger.error("ParseException !!!");
         }
-        cmdLogger.info("Create new TransactionConfiguration");
+        cmdLogger.info("Create new structures.TransactionConfiguration");
         TransactionConfiguration transactionConfiguration = new TransactionConfiguration(rangeOfCustomerId, rangeOfDate,
                 fileWithItem, rangeOfnumberOfItems, rangeOfQuantities, numberOfTrans, outDir);
         return transactionConfiguration;

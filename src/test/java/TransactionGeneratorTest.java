@@ -1,6 +1,9 @@
+import generators.TransactionGenerator;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mock;
+import structures.Item;
+import structures.Transaction;
+import structures.TransactionConfiguration;
 
 import java.util.List;
 

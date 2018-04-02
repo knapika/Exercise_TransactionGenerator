@@ -7,9 +7,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import structures.Transaction;
+import writers.TransactionJSONFileWriter;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.LinkedList;

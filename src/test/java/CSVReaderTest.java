@@ -2,10 +2,10 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import readers.CSVReader;
+import structures.Item;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.AccessDeniedException;
 
 import static org.assertj.core.api.Fail.fail;
 

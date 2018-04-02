@@ -1,6 +1,8 @@
-import com.sun.org.apache.xpath.internal.SourceTree;
+package readers;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import structures.Item;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,8 +1,11 @@
+package generators;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import structures.Item;
+import structures.Transaction;
+import structures.TransactionConfiguration;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,12 +38,12 @@ public class TransactionGenerator {
             Item[] itemsInTran = new Item[itemsCount];
             double sum = 0;
             for(int j = 0; j < itemsCount; j++){
-                TransactionGeneratorLogger.info("Get random Item");
+                TransactionGeneratorLogger.info("Get random structures.Item");
                 int randomItemIndex = randomsGenerator.getInteger(0, availableItemsArray.length);
                 TransactionGeneratorLogger.info("Get random quantity");
                 int quantity = randomsGenerator.getInteger(transactionConfiguration.getRangeOfQuantities()[0],
                         transactionConfiguration.getRangeOfQuantities()[1]);
-                TransactionGeneratorLogger.info("Create new Item in transaction");
+                TransactionGeneratorLogger.info("Create new structures.Item in transaction");
                 itemsInTran[j] =new Item(availableItemsArray[randomItemIndex].getName(), quantity,
                         availableItemsArray[randomItemIndex].getPrice());
                 sum += itemsInTran[j].getPrice() * quantity;

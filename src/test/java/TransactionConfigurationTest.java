@@ -1,5 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
+import structures.TransactionConfiguration;
 
 public class TransactionConfigurationTest {
     @Test
