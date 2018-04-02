@@ -11,11 +11,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class TransactionJSONFileWriter {
-    private final Logger TransactionJSONFileWriterLogger = LogManager.getLogger(TransactionJSONFileWriter.class);
+public class JSONWriter implements IWriter {
+    private final Logger JSONWriterLogger = LogManager.getLogger(JSONWriter.class);
     private final String dir;
 
-    public TransactionJSONFileWriter(String dir) {
+    public JSONWriter(String dir) {
         this.dir = dir;
     }
 
@@ -24,7 +24,7 @@ public class TransactionJSONFileWriter {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         BufferedWriter writer = null;
         try {
-            TransactionJSONFileWriterLogger.info("Start writing JSONs to file");
+            JSONWriterLogger.info("Start writing JSONs to file");
             for(Transaction tran : transactionList){
                 path = dir + "/transaction" + tran.getId() + ".json";
                 String jsonInString = gson.toJson(tran);
@@ -36,10 +36,10 @@ public class TransactionJSONFileWriter {
                 writer.write(jsonInString);
                 writer.close();
             }
-            TransactionJSONFileWriterLogger.info("JSONs have been saved to the file");
+            JSONWriterLogger.info("JSONs have been saved to the file");
             return true;
         } catch (IOException e) {
-            TransactionJSONFileWriterLogger.error("An error occurred during saving to the file");
+            JSONWriterLogger.error("An error occurred during saving to the file");
             e.printStackTrace();
             return false;
         }

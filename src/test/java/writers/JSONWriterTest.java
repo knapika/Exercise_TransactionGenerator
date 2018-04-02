@@ -1,3 +1,5 @@
+package writers;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Assert;
@@ -8,7 +10,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import structures.Transaction;
-import writers.TransactionJSONFileWriter;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TransactionJSONFileWriterTest {
+public class JSONWriterTest {
     private LocalDateTime now = LocalDateTime.now();
     private List<Transaction> transactionList = new LinkedList<Transaction>(Arrays.asList(
             new Transaction(2, 5,LocalDateTime.now(),null, 24.22)));
@@ -31,7 +32,7 @@ public class TransactionJSONFileWriterTest {
     @Test
     public void write() {
         //given
-        TransactionJSONFileWriter uut = new TransactionJSONFileWriter(".");
+        JSONWriter uut = new JSONWriter(".");
         String jsonString_0 = gson.toJson(transactionList.get(0));
 
         //when
@@ -48,7 +49,7 @@ public class TransactionJSONFileWriterTest {
     @Test
     public void writeWithNull() {
         //given
-        TransactionJSONFileWriter uut = new TransactionJSONFileWriter(".");
+        JSONWriter uut = new JSONWriter(".");
 
         //when
         boolean done = uut.write(transactionList, null);
@@ -59,7 +60,7 @@ public class TransactionJSONFileWriterTest {
     @Test
     public void wrongDir() throws Exception {
         //given
-        TransactionJSONFileWriter uut = new TransactionJSONFileWriter("badDir");
+        JSONWriter uut = new JSONWriter("badDir");
 
         //when
         boolean done = uut.write(transactionList, null);
