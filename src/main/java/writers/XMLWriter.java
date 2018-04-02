@@ -35,8 +35,8 @@ public class XMLWriter implements IWriter {
                     writer = writerBuff;
                 }
                 writer.write(xml);
-                XMLWriterLogger.debug("Transaction " + tran.getId() + " successfully written");
                 writer.close();
+                XMLWriterLogger.debug("Transaction " + tran.getId() + " successfully written");
             }
         } catch (IOException e) {
             e.printStackTrace();

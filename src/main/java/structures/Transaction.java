@@ -1,15 +1,24 @@
 package structures;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-
 public class Transaction {
-    private final int id;
-    private final int customerId;
-    private final String timestamp;
-    private final Item[] items;
-    private final BigDecimal sum;
+//    private final int id;
+//    private final int customerId;
+//    private final String timestamp;
+//    private final Item[] items;
+//    private final BigDecimal sum;
+    private int id;
+    private int customerId;
+    private String timestamp;
+    private Item[] items;
+    private BigDecimal sum;
+
+    public Transaction() {
+    }
 
     public Transaction(int id, int customerId, LocalDateTime date, Item[] listOfItems, double sum) {
         this.id = id;

@@ -29,12 +29,12 @@ public class Item {
         return quantity;
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                "name: " + name  +
-                ",quantity:"  + quantity +
-                ",price:"  + price +
-                "}";
-    }
+//    @Override
+//    public String toString() {
+//        return "{" +
+//                "name: " + name  +
+//                ",quantity:"  + quantity +
+//                ",price:"  + price +
+//                "}";
+//    }
 }

@@ -6,7 +6,10 @@ import readers.CmdParser;
 import structures.Item;
 import structures.Transaction;
 import structures.TransactionConfiguration;
-import writers.TransactionJSONFileWriter;
+import writers.IWriter;
+import writers.JSONWriter;
+import writers.XMLWriter;
+import writers.YAMLWriter;
 
 import java.util.List;
 
@@ -20,7 +23,7 @@ public class MainClass {
         Item[] items = csvReader.readItemsFromFile(configuration.getFileWithItem());
         TransactionGenerator generator = new TransactionGenerator(configuration, items);
         List<structures.Transaction> transactionList = generator.generateTransactions();
-        TransactionJSONFileWriter writer = new TransactionJSONFileWriter(configuration.getOurDir());
+        IWriter writer = new YAMLWriter(configuration.getOurDir());
         writer.write(transactionList, null);
     }
 }
