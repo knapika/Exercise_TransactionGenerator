@@ -27,6 +27,7 @@ public class CmdParser {
         options.addOption("itemsQuantity", true, "Range for quantity");
         options.addOption("eventsCount",  true, "Number of transaction");
         options.addOption("outDir",  true, "Output destination");
+        options.addOption("format",  true, "Output format");
     }
 
     public TransactionConfiguration parse(String[] args) throws Exception {
