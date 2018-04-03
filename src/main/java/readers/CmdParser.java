@@ -4,6 +4,10 @@ import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import structures.TransactionConfiguration;
+import writers.IWriter;
+import writers.JSONWriter;
+import writers.XMLWriter;
+import writers.YAMLWriter;
 
 
 import java.io.File;
@@ -34,45 +38,65 @@ public class CmdParser {
         int[] rangeOfQuantities = {1, 5};
         int numberOfTrans = 100;
         String outDir = ".";
+        String format = "JSON";
+        IWriter writer = null;
         CommandLineParser parser = new BasicParser();
         CommandLine cmd = null;
         try {
             cmd = parser.parse(options, args);
             if (cmd.hasOption("customerIds")) {
                 rangeOfCustomerId = checkRangeCorrectness(cmd.getOptionValue("customerIds"), "customerIds");
+                cmdLogger.debug("Set customerIds");
                 if(rangeOfCustomerId == null){
+                    cmdLogger.warn("Wrong range for customerIds");
                     throw new Exception("Zły zakres dla parametru CustomerID");
                 }
             }
             if (cmd.hasOption("dateRange")) {
                 rangeOfDate = cmd.getOptionValue("dateRange");
+                cmdLogger.debug("Set dateRange");
             } else {
                 rangeOfDate = setDefaultDate();
+                cmdLogger.debug("Set defaultDate");
             }
             if (cmd.hasOption("itemsFile")) {
                 fileWithItem = cmd.getOptionValue("itemsFile");
+                cmdLogger.debug("Set itemsFile");
             }
             if (cmd.hasOption("itemsCount")) {
                 rangeOfnumberOfItems = checkRangeCorrectness(cmd.getOptionValue("itemsCount"), "itemsCount");
+                cmdLogger.debug("Set itemsCount");
                 if(rangeOfnumberOfItems == null){
+                    cmdLogger.warn("Wrong range for itemsCount");
                     throw new Exception("Zły zakres dla parametru itemsCount");
                 }
             }
             if (cmd.hasOption("itemsQuantity")) {
                 rangeOfQuantities = checkRangeCorrectness(cmd.getOptionValue("itemsQuantity"), "itemsQuantity");
+                cmdLogger.debug("Set itemsQuantity");
                 if(rangeOfQuantities == null) {
+                    cmdLogger.warn("Wrong range for itemsQuantity");
                     throw new Exception("Zły zakres dla parametru itemsQuantity");
                 }
             }
             if (cmd.hasOption("eventsCount")) {
                 numberOfTrans = Integer.valueOf(cmd.getOptionValue("eventsCount"));
+                cmdLogger.debug("Set eventsCount");
             }
             if (cmd.hasOption("outDir")) {
                 outDir = cmd.getOptionValue("outDir");
+                cmdLogger.debug("Set outDir");
                 File dir = new File(outDir);
                 if(!dir.exists()) {
                     cmdLogger.error("outDir not exists!");
                     throw new Exception("Podany katalog nie istnieje!");
+                }
+            }
+            if(cmd.hasOption("format")){
+                format = cmd.getOptionValue("format");
+                writer = setWriter(format, outDir);
+                if(writer == null) {
+                    throw new Exception("Wybrano niedozwolony format zapisu!");
                 }
             }
         } catch (ParseException e) {
@@ -105,6 +129,23 @@ public class CmdParser {
         else{
             cmdLogger.error("Wrong range for " + paramName);
             return null;
+        }
+    }
+
+    private IWriter setWriter(String format, String dir) {
+        switch (format.toLowerCase()) {
+            case "json":
+                cmdLogger.debug("Set JSONWriter");
+                return new JSONWriter(dir);
+            case "xml":
+                cmdLogger.debug("Set XMLWriter");
+                return new XMLWriter(dir);
+            case "yaml":
+                cmdLogger.debug("Set YAMLWriter");
+                return new YAMLWriter(dir);
+            default:
+                cmdLogger.error("Set null writer!");
+                return null;
         }
     }
 }
