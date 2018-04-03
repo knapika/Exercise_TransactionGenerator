@@ -1,29 +1,26 @@
 package launchers;
 
+import generators.RandomsGenerator;
 import generators.TransactionGenerator;
 import readers.CSVReader;
 import readers.CmdParser;
 import structures.Item;
-import structures.Transaction;
 import structures.TransactionConfiguration;
 import writers.IWriter;
-import writers.JSONWriter;
-import writers.XMLWriter;
-import writers.YAMLWriter;
 
 import java.util.List;
 
 public class MainClass {
     private static CmdParser cmdParser = new CmdParser();
     private static CSVReader csvReader = new CSVReader();
-
+    private static RandomsGenerator  randomsGenerator = new RandomsGenerator();
 
     public static void main(String[] args) throws Exception {
         TransactionConfiguration configuration = cmdParser.parse(args);
         Item[] items = csvReader.readItemsFromFile(configuration.getFileWithItem());
-        TransactionGenerator generator = new TransactionGenerator(configuration, items);
+        TransactionGenerator generator = new TransactionGenerator(configuration, randomsGenerator, items);
         List<structures.Transaction> transactionList = generator.generateTransactions();
-        IWriter writer = new YAMLWriter(configuration.getOurDir());
+        IWriter writer = configuration.getWriter();
         writer.write(transactionList, null);
     }
 }

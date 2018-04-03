@@ -1,3 +1,5 @@
+package generators;
+
 import generators.RandomsGenerator;
 import org.junit.Assert;
 import org.junit.Test;

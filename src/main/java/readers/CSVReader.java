@@ -21,6 +21,7 @@ public class CSVReader {
                 String[] itemPara = line.split(",");
                 Item item = new Item(itemPara[0], Double.valueOf(itemPara[1]));
                 itemsList.add(item);
+                CSVReaderLogger.debug("Item: " + item.getName() + " was read");
             }
             Item[] itemsArray = new Item[itemsList.size()];
             itemsList.toArray(itemsArray);

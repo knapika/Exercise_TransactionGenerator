@@ -1,3 +1,5 @@
+package structures;
+
 import org.junit.Assert;
 import org.junit.Test;
 import structures.Item;

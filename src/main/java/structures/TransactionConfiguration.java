@@ -1,5 +1,7 @@
 package structures;
 
+import writers.IWriter;
+
 import java.util.Arrays;
 
 public class TransactionConfiguration {
@@ -10,10 +12,11 @@ public class TransactionConfiguration {
     private final int[] rangeOfQuantities;
     private final int numberOfTrans;
     private final String ourDir;
+    private final IWriter writer;
 
     public TransactionConfiguration(int[] rangeOfCustomerId, String rangeOfDate, String fileWithItem,
                                     int[] rangeOfnumberOfItems, int[] rangeOfQuantities, int numberOfTrans,
-                                    String ourDir) {
+                                    String ourDir, IWriter writer ) {
         this.rangeOfCustomerId = rangeOfCustomerId;
         this.rangeOfDate = rangeOfDate;
         this.fileWithItem = fileWithItem;
@@ -21,6 +24,7 @@ public class TransactionConfiguration {
         this.rangeOfQuantities = rangeOfQuantities;
         this.numberOfTrans = numberOfTrans;
         this.ourDir = ourDir;
+        this.writer = writer;
     }
 
     @Override
@@ -65,6 +69,10 @@ public class TransactionConfiguration {
 
     public String getOurDir() {
         return ourDir;
+    }
+
+    public IWriter getWriter() {
+        return writer;
     }
 }
 

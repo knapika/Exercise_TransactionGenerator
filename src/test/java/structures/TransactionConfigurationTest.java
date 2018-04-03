@@ -1,8 +1,14 @@
+package structures;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mock;
 import structures.TransactionConfiguration;
+import writers.IWriter;
 
 public class TransactionConfigurationTest {
+    @Mock
+    private IWriter writer;
     @Test
     public void getCustomerId() {
         //given
@@ -10,7 +16,7 @@ public class TransactionConfigurationTest {
         int[] itemsCount = {5, 15};
         int[] itemsQua = {1, 30};
         TransactionConfiguration uut = new TransactionConfiguration(customerIds, "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",
-                "items.csv", itemsCount, itemsQua, 1000, ".");
+                "items.csv", itemsCount, itemsQua, 1000, ".", writer);
 
         //when
 
@@ -26,7 +32,7 @@ public class TransactionConfigurationTest {
         int[] itemsQua = {1, 30};
         String date = "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100";
         TransactionConfiguration uut = new TransactionConfiguration(customerIds, date,"items.csv", itemsCount,
-                itemsQua, 1000, ".");
+                itemsQua, 1000, ".", writer);
 
         //when
 
@@ -42,7 +48,7 @@ public class TransactionConfigurationTest {
         int[] itemsQua = {1, 30};
         String date = "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100";
         TransactionConfiguration uut = new TransactionConfiguration(customerIds, date,"items.csv", itemsCount,
-                itemsQua, 1000, ".");
+                itemsQua, 1000, ".", writer);
 
         //when
 
@@ -58,7 +64,7 @@ public class TransactionConfigurationTest {
         int[] itemsQua = {1, 30};
         String date = "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100";
         TransactionConfiguration uut = new TransactionConfiguration(customerIds, date,"items.csv", itemsCount,
-                itemsQua, 1000, ".");
+                itemsQua, 1000, ".", writer);
 
         //when
 
@@ -74,7 +80,7 @@ public class TransactionConfigurationTest {
         int[] itemsQua = {1, 30};
         String date = "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100";
         TransactionConfiguration uut = new TransactionConfiguration(customerIds, date,"items.csv", itemsCount,
-                itemsQua, 1000, ".");
+                itemsQua, 1000, ".", writer);
 
         //when
 
@@ -90,7 +96,7 @@ public class TransactionConfigurationTest {
         int[] itemsQua = {1, 30};
         String date = "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100";
         TransactionConfiguration uut = new TransactionConfiguration(customerIds, date,"items.csv", itemsCount,
-                itemsQua, 1000, ".");
+                itemsQua, 1000, ".", writer);
 
         //when
 
@@ -106,7 +112,7 @@ public class TransactionConfigurationTest {
         int[] itemsQua = {1, 30};
         String date = "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100";
         TransactionConfiguration uut = new TransactionConfiguration(customerIds, date,"items.csv", itemsCount,
-                itemsQua, 1000, ".");
+                itemsQua, 1000, ".", writer);
 
         //when
 

@@ -105,7 +105,7 @@ public class CmdParser {
         }
         cmdLogger.info("Create new structures.TransactionConfiguration");
         TransactionConfiguration transactionConfiguration = new TransactionConfiguration(rangeOfCustomerId, rangeOfDate,
-                fileWithItem, rangeOfnumberOfItems, rangeOfQuantities, numberOfTrans, outDir);
+                fileWithItem, rangeOfnumberOfItems, rangeOfQuantities, numberOfTrans, outDir, writer);
         return transactionConfiguration;
     }
 

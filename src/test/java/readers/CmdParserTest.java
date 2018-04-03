@@ -1,7 +1,11 @@
+package readers;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mock;
 import readers.CmdParser;
 import structures.TransactionConfiguration;
+import writers.IWriter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,6 +14,8 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Fail.fail;
 
 public class CmdParserTest {
+    @Mock
+    private IWriter writer;
     @Test
     public void correctRange(){
         //given
@@ -103,7 +109,7 @@ public class CmdParserTest {
         CmdParser uut = new CmdParser();
         String[] args = {"-customerIds", "1:20", "-dateRange", "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",
                 "-itemsFile", "items.csv", "-itemsCount", "16:15", "-itemsQuantity", "1:30", "-eventsCount", "1000", "-outDir",
-                "./output"};
+                "./output", "-format", "xml"};
         try {
             //when
             uut.parse(args);
@@ -159,7 +165,7 @@ public class CmdParserTest {
         int[] itemsCount = {5, 15};
         int[] itemsQua = {1, 30};
         TransactionConfiguration tc = new TransactionConfiguration(customerIds, "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",
-                "items.csv", itemsCount, itemsQua, 1000, ".");
+                "items.csv", itemsCount, itemsQua, 1000, ".", writer);
         //when
 
         //then
@@ -177,7 +183,7 @@ public class CmdParserTest {
         int[] itemsCount = {1, 5};
         int[] itemsQua = {1, 5};
         TransactionConfiguration tc = new TransactionConfiguration(customerIds, today,"items.csv",
-                itemsCount, itemsQua, 100, ".");
+                itemsCount, itemsQua, 100, ".", writer);
 
         //when
 

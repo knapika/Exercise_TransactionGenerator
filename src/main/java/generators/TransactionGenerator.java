@@ -12,15 +12,14 @@ import java.util.List;
 
 public class TransactionGenerator {
     private final Logger TransactionGeneratorLogger = LogManager.getLogger(TransactionGenerator.class);
-    private TransactionConfiguration transactionConfiguration;
+    private final TransactionConfiguration transactionConfiguration;
     private final RandomsGenerator randomsGenerator;
-    private Item[] availableItemsArray;
+    private final Item[] availableItemsArray;
 
-
-    public TransactionGenerator(TransactionConfiguration transactionConfiguration, Item[] items) {
+    public TransactionGenerator(TransactionConfiguration transactionConfiguration, RandomsGenerator randomsGenerator, Item[] availableItemsArray) {
         this.transactionConfiguration = transactionConfiguration;
-        this.availableItemsArray = items;
-        this.randomsGenerator = new RandomsGenerator();
+        this.randomsGenerator = randomsGenerator;
+        this.availableItemsArray = availableItemsArray;
     }
 
     public List<Transaction> generateTransactions () {
