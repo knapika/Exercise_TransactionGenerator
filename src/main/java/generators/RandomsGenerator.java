@@ -12,7 +12,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class RandomsGenerator {
     private final org.apache.logging.log4j.Logger RandomsGeneratorLogger = LogManager.getLogger(RandomsGenerator.class);
     int getInteger(int a, int b) {
-        int randomNum = ThreadLocalRandom.current().nextInt(a, b);
+        int randomNum;
+        if(a != b) {
+            randomNum = ThreadLocalRandom.current().nextInt(a, b);
+        } else {
+            randomNum = a;
+        }
         return randomNum;
     }
 
