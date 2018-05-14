@@ -73,10 +73,15 @@ public class InputValues {
         String result = outDir;
         File dir = new File(outDir);
         if(!dir.exists()) {
-            InputValuesLogger.error("outDir not exists used default!");
-            outDir = ".";
+            InputValuesLogger.error("outDir not exists!");
+            if(dir.mkdir()) {
+                InputValuesLogger.error("Create dir!");
+            } else {
+                InputValuesLogger.error("Cannot create dir used default!");
+                result = ".";
+            }
         }
-        return outDir;
+        return result;
     }
 
     private int validateNumberOfTrans(String numberOfTrans) {
