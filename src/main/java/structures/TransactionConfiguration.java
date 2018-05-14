@@ -5,14 +5,11 @@ import writers.IWriter;
 import java.util.Arrays;
 
 public class TransactionConfiguration {
-    //private final int[] rangeOfCustomerId;
     private final Range<Integer> rangeOfCustomerId;
     private final String rangeOfDate;
     private final String fileWithItem;
     private final Range<Integer> rangeOfnumberOfItems;
     private final Range<Integer> rangeOfQuantities;
-    //private final int[] rangeOfnumberOfItems;
-    //private final int[] rangeOfQuantities;
     private final int numberOfTrans;
     private final String ourDir;
     private final IWriter writer;

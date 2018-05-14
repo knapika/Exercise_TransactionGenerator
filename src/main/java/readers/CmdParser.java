@@ -34,13 +34,10 @@ public class CmdParser {
     public TransactionConfiguration parse(String[] args) throws Exception {
         cmdLogger.info("Start reading from CMD");
         Range<Integer> rangeOfCustomerId = new Range<>(1, 20);
-//        int[] rangeOfCustomerId = {1, 20};
         String rangeOfDate ="";
         String fileWithItem = "";
         Range<Integer> rangeOfnumberOfItems =  new Range<>(1, 5);
         Range<Integer> rangeOfQuantities = new Range<>(1, 5);
-//        int[] rangeOfnumberOfItems = {1, 5};
-//        int[] rangeOfQuantities = {1, 5};
         int numberOfTrans = 100;
         String outDir = ".";
         String format = "JSON";
