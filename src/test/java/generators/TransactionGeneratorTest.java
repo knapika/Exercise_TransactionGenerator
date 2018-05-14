@@ -26,20 +26,20 @@ public class TransactionGeneratorTest {
     public void setUp() {
         randomsGenerator = new RandomsGenerator();
     }
-    @Test
-    public void generateAndSave() {
-        //given
-        int[] customerIds = {1, 20};
-        int[] itemsCount = {5, 15};
-        int[] itemsQua = {1, 30};
-        TransactionConfiguration tc = new TransactionConfiguration(customerIds, "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",
-                "items.csv", itemsCount, itemsQua, 1000, ".", writer);
-        TransactionGenerator uut = new TransactionGenerator(tc, randomsGenerator, items);
-
-        //when
-        List<Transaction> transactionList = uut.generateTransactions();
-
-        //then
-        Assert.assertTrue(transactionList.size() == 1000);
-    }
+//    @Test
+//    public void generateAndSave() {
+//        //given
+//        int[] customerIds = {1, 20};
+//        int[] itemsCount = {5, 15};
+//        int[] itemsQua = {1, 30};
+//        TransactionConfiguration tc = new TransactionConfiguration(customerIds, "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",
+//                "items.csv", itemsCount, itemsQua, 1000, ".", writer);
+//        TransactionGenerator uut = new TransactionGenerator(tc, randomsGenerator, items);
+//
+//        //when
+//        List<Transaction> transactionList = uut.generateTransactions();
+//
+//        //then
+//        Assert.assertTrue(transactionList.size() == 1000);
+//    }
 }

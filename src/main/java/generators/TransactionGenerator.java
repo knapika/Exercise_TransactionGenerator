@@ -28,11 +28,11 @@ public class TransactionGenerator {
 
         for(int i = 0; i < numberOfTrans; i++) {
             TransactionGeneratorLogger.info("Get random customerId");
-            int customerId = randomsGenerator.getInteger(transactionConfiguration.getRangeOfCustomerId()[0],
-                    transactionConfiguration.getRangeOfCustomerId()[1]);
+            int customerId = randomsGenerator.getInteger(transactionConfiguration.getRangeOfCustomerId().getFrom(),
+                    transactionConfiguration.getRangeOfCustomerId().getTo());
             TransactionGeneratorLogger.info("Get random itemsCount");
-            int itemsCount = randomsGenerator.getInteger(transactionConfiguration.getRangeOfnumberOfItems()[0],
-                    transactionConfiguration.getRangeOfnumberOfItems()[1]);
+            int itemsCount = randomsGenerator.getInteger(transactionConfiguration.getRangeOfnumberOfItems().getFrom(),
+                    transactionConfiguration.getRangeOfnumberOfItems().getTo());
             LocalDateTime timestemp = randomsGenerator.getTimestamp(transactionConfiguration.getRangeOfDate());
             Item[] itemsInTran = new Item[itemsCount];
             double sum = 0;
@@ -40,8 +40,8 @@ public class TransactionGenerator {
                 TransactionGeneratorLogger.info("Get random structures.Item");
                 int randomItemIndex = randomsGenerator.getInteger(0, availableItemsArray.length);
                 TransactionGeneratorLogger.info("Get random quantity");
-                int quantity = randomsGenerator.getInteger(transactionConfiguration.getRangeOfQuantities()[0],
-                        transactionConfiguration.getRangeOfQuantities()[1]);
+                int quantity = randomsGenerator.getInteger(transactionConfiguration.getRangeOfQuantities().getFrom(),
+                        transactionConfiguration.getRangeOfQuantities().getTo());
                 TransactionGeneratorLogger.info("Create new structures.Item in transaction");
                 itemsInTran[j] =new Item(availableItemsArray[randomItemIndex].getName(), quantity,
                         availableItemsArray[randomItemIndex].getPrice());

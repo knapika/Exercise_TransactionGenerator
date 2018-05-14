@@ -5,18 +5,21 @@ import writers.IWriter;
 import java.util.Arrays;
 
 public class TransactionConfiguration {
-    private final int[] rangeOfCustomerId;
+    //private final int[] rangeOfCustomerId;
+    private final Range<Integer> rangeOfCustomerId;
     private final String rangeOfDate;
     private final String fileWithItem;
-    private final int[] rangeOfnumberOfItems;
-    private final int[] rangeOfQuantities;
+    private final Range<Integer> rangeOfnumberOfItems;
+    private final Range<Integer> rangeOfQuantities;
+    //private final int[] rangeOfnumberOfItems;
+    //private final int[] rangeOfQuantities;
     private final int numberOfTrans;
     private final String ourDir;
     private final IWriter writer;
 
-    public TransactionConfiguration(int[] rangeOfCustomerId, String rangeOfDate, String fileWithItem,
-                                    int[] rangeOfnumberOfItems, int[] rangeOfQuantities, int numberOfTrans,
-                                    String ourDir, IWriter writer ) {
+    public TransactionConfiguration(Range<Integer> rangeOfCustomerId, String rangeOfDate, String fileWithItem,
+                                    Range<Integer> rangeOfnumberOfItems, Range<Integer> rangeOfQuantities, int numberOfTrans,
+                                    String ourDir, IWriter writer) {
         this.rangeOfCustomerId = rangeOfCustomerId;
         this.rangeOfDate = rangeOfDate;
         this.fileWithItem = fileWithItem;
@@ -35,15 +38,19 @@ public class TransactionConfiguration {
         TransactionConfiguration that = (TransactionConfiguration) o;
 
         if (numberOfTrans != that.numberOfTrans) return false;
-        if (!Arrays.equals(rangeOfCustomerId, that.rangeOfCustomerId)) return false;
+        if (rangeOfCustomerId != null ? !rangeOfCustomerId.equals(that.rangeOfCustomerId) : that.rangeOfCustomerId != null)
+            return false;
         if (rangeOfDate != null ? !rangeOfDate.equals(that.rangeOfDate) : that.rangeOfDate != null) return false;
         if (fileWithItem != null ? !fileWithItem.equals(that.fileWithItem) : that.fileWithItem != null) return false;
-        if (!Arrays.equals(rangeOfnumberOfItems, that.rangeOfnumberOfItems)) return false;
-        if (!Arrays.equals(rangeOfQuantities, that.rangeOfQuantities)) return false;
-        return ourDir != null ? ourDir.equals(that.ourDir) : that.ourDir == null;
+        if (rangeOfnumberOfItems != null ? !rangeOfnumberOfItems.equals(that.rangeOfnumberOfItems) : that.rangeOfnumberOfItems != null)
+            return false;
+        if (rangeOfQuantities != null ? !rangeOfQuantities.equals(that.rangeOfQuantities) : that.rangeOfQuantities != null)
+            return false;
+        if (ourDir != null ? !ourDir.equals(that.ourDir) : that.ourDir != null) return false;
+        return writer != null ? writer.equals(that.writer) : that.writer == null;
     }
 
-    public int[] getRangeOfCustomerId() {
+    public Range<Integer> getRangeOfCustomerId() {
         return rangeOfCustomerId;
     }
 
@@ -55,11 +62,11 @@ public class TransactionConfiguration {
         return fileWithItem;
     }
 
-    public int[] getRangeOfnumberOfItems() {
+    public Range<Integer> getRangeOfnumberOfItems() {
         return rangeOfnumberOfItems;
     }
 
-    public int[] getRangeOfQuantities() {
+    public Range<Integer> getRangeOfQuantities() {
         return rangeOfQuantities;
     }
 

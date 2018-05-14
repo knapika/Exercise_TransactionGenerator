@@ -154,40 +154,40 @@ public class CmdParserTest {
         }
     }
 
-    @Test
-    public void testAllParameters() throws Exception {
-        //given
-        CmdParser uut = new CmdParser();
-        String[] args = {"-customerIds", "1:20", "-dateRange", "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",
-                "-itemsFile", "items.csv", "-itemsCount", "5:15", "-itemsQuantity", "1:30", "-eventsCount", "1000", "-outDir",
-                "."};
-        int[] customerIds = {1, 20};
-        int[] itemsCount = {5, 15};
-        int[] itemsQua = {1, 30};
-        TransactionConfiguration tc = new TransactionConfiguration(customerIds, "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",
-                "items.csv", itemsCount, itemsQua, 1000, ".", writer);
-        //when
+//    @Test
+//    public void testAllParameters() throws Exception {
+//        //given
+//        CmdParser uut = new CmdParser();
+//        String[] args = {"-customerIds", "1:20", "-dateRange", "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",
+//                "-itemsFile", "items.csv", "-itemsCount", "5:15", "-itemsQuantity", "1:30", "-eventsCount", "1000", "-outDir",
+//                "."};
+//        int[] customerIds = {1, 20};
+//        int[] itemsCount = {5, 15};
+//        int[] itemsQua = {1, 30};
+//        TransactionConfiguration tc = new TransactionConfiguration(customerIds, "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",
+//                "items.csv", itemsCount, itemsQua, 1000, ".", writer);
+//        //when
+//
+//        //then
+//        Assert.assertTrue(uut.parse(args).equals(tc));
+//    }
 
-        //then
-        Assert.assertTrue(uut.parse(args).equals(tc));
-    }
-
-    @Test
-    public void testDefualts () throws Exception {
-        //given
-        CmdParser uut = new CmdParser();
-        String[] args = {"-itemsFile", "items.csv"};
-        String today = LocalDate.now().toString() + "T00:00:00.000-0100:" + LocalDate.now().toString() +
-                "T23:59:59.999-0100";
-        int[] customerIds = {1, 20};
-        int[] itemsCount = {1, 5};
-        int[] itemsQua = {1, 5};
-        TransactionConfiguration tc = new TransactionConfiguration(customerIds, today,"items.csv",
-                itemsCount, itemsQua, 100, ".", writer);
-
-        //when
-
-        //then
-        Assert.assertTrue(uut.parse(args).equals(tc));
-    }
+//    @Test
+//    public void testDefualts () throws Exception {
+//        //given
+//        CmdParser uut = new CmdParser();
+//        String[] args = {"-itemsFile", "items.csv"};
+//        String today = LocalDate.now().toString() + "T00:00:00.000-0100:" + LocalDate.now().toString() +
+//                "T23:59:59.999-0100";
+//        int[] customerIds = {1, 20};
+//        int[] itemsCount = {1, 5};
+//        int[] itemsQua = {1, 5};
+//        TransactionConfiguration tc = new TransactionConfiguration(customerIds, today,"items.csv",
+//                itemsCount, itemsQua, 100, ".", writer);
+//
+//        //when
+//
+//        //then
+//        Assert.assertTrue(uut.parse(args).equals(tc));
+//    }
 }

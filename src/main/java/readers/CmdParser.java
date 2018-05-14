@@ -3,6 +3,7 @@ package readers;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import structures.Range;
 import structures.TransactionConfiguration;
 import writers.IWriter;
 import writers.JSONWriter;
@@ -32,11 +33,14 @@ public class CmdParser {
 
     public TransactionConfiguration parse(String[] args) throws Exception {
         cmdLogger.info("Start reading from CMD");
-        int[] rangeOfCustomerId = {1, 20};
+        Range<Integer> rangeOfCustomerId = new Range<>(1, 20);
+//        int[] rangeOfCustomerId = {1, 20};
         String rangeOfDate ="";
         String fileWithItem = "";
-        int[] rangeOfnumberOfItems = {1, 5};
-        int[] rangeOfQuantities = {1, 5};
+        Range<Integer> rangeOfnumberOfItems =  new Range<>(1, 5);
+        Range<Integer> rangeOfQuantities = new Range<>(1, 5);
+//        int[] rangeOfnumberOfItems = {1, 5};
+//        int[] rangeOfQuantities = {1, 5};
         int numberOfTrans = 100;
         String outDir = ".";
         String format = "JSON";
@@ -120,12 +124,12 @@ public class CmdParser {
         return todayStart + ":" + todayEnd.toString();
     }
 
-    private int[] checkRangeCorrectness(String range, String paramName) {
+    private Range<Integer> checkRangeCorrectness(String range, String paramName) {
         String[] tempString = range.split(":");
         int[] rangeInt = {Integer.valueOf(tempString[0]), Integer.valueOf(tempString[1])};
         if(rangeInt[0] <= rangeInt[1]){
             cmdLogger.info("Correct range for " + paramName);
-            return rangeInt;
+            return new Range<>(rangeInt[0], rangeInt[1]);
         }
         else{
             cmdLogger.error("Wrong range for " + paramName);
