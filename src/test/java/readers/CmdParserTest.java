@@ -16,28 +16,28 @@ import static org.assertj.core.api.Fail.fail;
 public class CmdParserTest {
     @Mock
     private IWriter writer;
-    @Test
-    public void correctRange(){
-        //given
-        CmdParser uut = new CmdParser();
-        Method method = null;
-        int[] result = new int[5];
-        Class[] params = {String.class, String.class};
-        try {
-            //when
-            method = CmdParser.class.getDeclaredMethod("checkRangeCorrectness", params);
-            method.setAccessible(true);
-            result = (int[]) method.invoke(uut,"1:20", "xyz");
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        //then
-        Assert.assertTrue(result[0] == 1 && result[1] == 20);
-    }
+//    @Test
+//    public void correctRange(){
+//        //given
+//        CmdParser uut = new CmdParser();
+//        Method method = null;
+//        int[] result = new int[5];
+//        Class[] params = {String.class, String.class};
+//        try {
+//            //when
+//            method = CmdParser.class.getDeclaredMethod("checkRangeCorrectness", params);
+//            method.setAccessible(true);
+//            result = (int[]) method.invoke(uut,"1:20", "xyz");
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
+//        //then
+//        Assert.assertTrue(result[0] == 1 && result[1] == 20);
+//    }
 
     @Test
     public void incorrectRange(){
