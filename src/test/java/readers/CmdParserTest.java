@@ -39,52 +39,52 @@ public class CmdParserTest {
 //        Assert.assertTrue(result[0] == 1 && result[1] == 20);
 //    }
 
-    @Test
-    public void incorrectRange(){
-        //given
-        CmdParser uut = new CmdParser();
-        Method method = null;
-        int[] result = new int[5];
-        Class[] params = {String.class, String.class};
-        try {
-            //when
-            method = CmdParser.class.getDeclaredMethod("checkRangeCorrectness", params);
-            method.setAccessible(true);
-            result = (int[]) method.invoke(uut,"21:20", "xyz");
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        //then
-        Assert.assertTrue(result == null);
-    }
-
-    @Test
-    public void defaultDate() {
-        //given
-        CmdParser uut = new CmdParser();
-        Method method = null;
-        String result = null;
-        String expectedDate = LocalDate.now().toString() + "T00:00:00.000-0100:" + LocalDate.now().toString() +
-                "T23:59:59.999-0100";
-        try {
-            //when
-            method = CmdParser.class.getDeclaredMethod("setDefaultDate", null);
-            method.setAccessible(true);
-            result = (String) method.invoke(uut,null);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        //then
-        Assert.assertTrue(result.equals(expectedDate));
-    }
+//    @Test
+//    public void incorrectRange(){
+//        //given
+//        CmdParser uut = new CmdParser();
+//        Method method = null;
+//        int[] result = new int[5];
+//        Class[] params = {String.class, String.class};
+//        try {
+//            //when
+//            method = CmdParser.class.getDeclaredMethod("checkRangeCorrectness", params);
+//            method.setAccessible(true);
+//            result = (int[]) method.invoke(uut,"21:20", "xyz");
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
+//        //then
+//        Assert.assertTrue(result == null);
+//    }
+//
+//    @Test
+//    public void defaultDate() {
+//        //given
+//        CmdParser uut = new CmdParser();
+//        Method method = null;
+//        String result = null;
+//        String expectedDate = LocalDate.now().toString() + "T00:00:00.000-0100:" + LocalDate.now().toString() +
+//                "T23:59:59.999-0100";
+//        try {
+//            //when
+//            method = CmdParser.class.getDeclaredMethod("setDefaultDate", null);
+//            method.setAccessible(true);
+//            result = (String) method.invoke(uut,null);
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
+//        //then
+//        Assert.assertTrue(result.equals(expectedDate));
+//    }
 
     @Test
     public void incorrectCustomerIds() {

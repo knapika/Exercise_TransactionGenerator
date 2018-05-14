@@ -4,6 +4,7 @@ import generators.RandomsGenerator;
 import generators.TransactionGenerator;
 import readers.CSVReader;
 import readers.CmdParser;
+import readers.PropertiesReader;
 import structures.InputValues;
 import structures.Item;
 import structures.TransactionConfiguration;
@@ -13,11 +14,13 @@ import java.util.List;
 
 public class MainClass {
     private static CmdParser cmdParser = new CmdParser();
+    private static PropertiesReader propertiesReader = new PropertiesReader();
     private static CSVReader csvReader = new CSVReader();
     private static RandomsGenerator  randomsGenerator = new RandomsGenerator();
 
     public static void main(String[] args) throws Exception {
-        InputValues inputValues = cmdParser.parse(args);
+        InputValues inputValues = propertiesReader.getInputValues();
+//        InputValues inputValues = cmdParser.parse(args);
         TransactionConfiguration configuration = inputValues.validateInputAndGetTransactionConfiguration();
         Item[] items = csvReader.readItemsFromFile(configuration.getFileWithItem());
         TransactionGenerator generator = new TransactionGenerator(configuration, randomsGenerator, items);
