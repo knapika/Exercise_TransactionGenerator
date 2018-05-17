@@ -19,8 +19,12 @@ public class MainClass {
     private static RandomsGenerator  randomsGenerator = new RandomsGenerator();
 
     public static void main(String[] args) throws Exception {
-        InputValues inputValues = propertiesReader.getInputValues();
-//        InputValues inputValues = cmdParser.parse(args);
+        InputValues inputValues;
+        if(args.length > 0) {
+            inputValues = cmdParser.parse(args);
+        } else {
+            inputValues = propertiesReader.getInputValues();
+        }
         TransactionConfiguration configuration = inputValues.validateInputAndGetTransactionConfiguration();
         Item[] items = csvReader.readItemsFromFile(configuration.getFileWithItem());
         TransactionGenerator generator = new TransactionGenerator(configuration, randomsGenerator, items);

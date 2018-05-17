@@ -26,7 +26,7 @@ public class PropertiesReader {
         InputStream input = null;
 
         try {
-            input = new FileInputStream("src\\main\\resources\\generator.properties");
+            input = new FileInputStream("/storage/generator.properties");
             prop.load(input);
 
             if(prop.getProperty("itemsFile") != null) {
