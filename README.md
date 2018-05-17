@@ -13,3 +13,12 @@ java -jar build/libs/Transaction_generator.jar  -itemsFile items.csv -itemsCount
 
 
 gradle publishToMavenLocal
+
+
+Jeżeli chcemy skorzystać z kontenera dockera, to należy wykonać polecenia:
+
+docker build --tag generator .
+
+docker run -v <sciezka do katalogu z plikami .properties i .csv>:/storage -it generator
+  
+Przykładowy katalog z wymienionymi danymi znajduje się w repo.
