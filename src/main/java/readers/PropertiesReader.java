@@ -68,6 +68,6 @@ public class PropertiesReader {
             e.printStackTrace();
         }
         return new InputValues(rangeOfCustomerId, rangeOfDate, fileWithItem, rangeOfnumberOfItems, rangeOfQuantities,
-                numberOfTrans, outDir, format);
+                numberOfTrans, outDir, format, "", "", "", true);
     }
 }

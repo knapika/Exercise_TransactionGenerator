@@ -23,9 +23,14 @@ public class InputValues {
     private final String numberOfTrans;
     private final String ourDir;
     private final String format;
+    private final String broker;
+    private final String queue;
+    private final String topic;
+    private final boolean ifOutDir;
 
-    public InputValues(String rangeOfCustomerId, String rangeOfDate, String fileWithItem, String rangeOfnumberOfItems, 
-                       String rangeOfQuantities, String numberOfTrans, String ourDir, String format) {
+    public InputValues(String rangeOfCustomerId, String rangeOfDate, String fileWithItem, String rangeOfnumberOfItems,
+                       String rangeOfQuantities, String numberOfTrans, String ourDir, String format, String broker,
+                       String queue, String topic, boolean outDir) {
         this.rangeOfCustomerId = rangeOfCustomerId;
         this.rangeOfDate = rangeOfDate;
         this.fileWithItem = fileWithItem;
@@ -34,6 +39,10 @@ public class InputValues {
         this.numberOfTrans = numberOfTrans;
         this.ourDir = ourDir;
         this.format = format;
+        this.broker = broker;
+        this.queue = queue;
+        this.topic = topic;
+        this.ifOutDir = outDir;
     }
 
     public TransactionConfiguration validateInputAndGetTransactionConfiguration() {
@@ -46,10 +55,24 @@ public class InputValues {
         String dateRange = validateDate(rangeOfDate);
         int transCount = validateNumberOfTrans(numberOfTrans);
         String outDir = validateOutDir(ourDir);
+        String validatedFormat = validateFormat(this.format);
         IWriter writer = getWriter(format, outDir);
 
         return new TransactionConfiguration(rangeForCustomerIDs, dateRange, fileWithItem, rangeForItems, rangeForQuantities,
-                transCount, outDir, writer);
+                transCount, outDir, writer, broker, queue, topic, ifOutDir, validatedFormat);
+    }
+
+    private String validateFormat(String format) {
+        switch (format.toLowerCase()) {
+            case "json":
+                return "json";
+            case "xml":
+               return "xml";
+            case "yaml":
+                return "yaml";
+            default:
+                return "json";
+        }
     }
 
     private IWriter getWriter(String format, String dir) {

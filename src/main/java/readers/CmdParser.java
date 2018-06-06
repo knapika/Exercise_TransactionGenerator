@@ -30,6 +30,9 @@ public class CmdParser {
         options.addOption("eventsCount",  true, "Number of transaction");
         options.addOption("outDir",  true, "Output destination");
         options.addOption("format",  true, "Output format");
+        options.addOption("broker",  true, "Broker's url");
+        options.addOption("queue",  true, "Queue name");
+        options.addOption("topic",  true, "topic");
     }
 
     public InputValues parse(String[] args) throws Exception {
@@ -42,6 +45,10 @@ public class CmdParser {
         String numberOfTrans = "";
         String outDir = "";
         String format = "";
+        String broker = "";
+        String topic = "";
+        String queue = "";
+        boolean ifOutDir = false;
         CommandLineParser parser = new BasicParser();
         CommandLine cmd = null;
         try {
@@ -73,17 +80,31 @@ public class CmdParser {
             if (cmd.hasOption("outDir")) {
                 outDir = cmd.getOptionValue("outDir");
                 cmdLogger.debug("Get outDir");
+                ifOutDir = true;
             }
             if(cmd.hasOption("format")){
                 format = cmd.getOptionValue("format");
                 cmdLogger.debug("Get format type");
+            }
+            if(cmd.hasOption("broker")){
+                broker = cmd.getOptionValue("broker");
+                cmdLogger.debug("Get broker url");
+            }
+            if(cmd.hasOption("queue")){
+                queue = cmd.getOptionValue("queue");
+                cmdLogger.debug("Get queue name");
+            }
+            if(cmd.hasOption("topic")){
+                topic = cmd.getOptionValue("topic");
+                cmdLogger.debug("Get topic");
             }
         } catch (ParseException e) {
             cmdLogger.error("ParseException !!!");
         }
         cmdLogger.info("Create new structures.InputValues");
         InputValues inputValues = new InputValues(rangeOfCustomerId, rangeOfDate,
-                fileWithItem, rangeOfnumberOfItems, rangeOfQuantities, numberOfTrans, outDir, format);
+                fileWithItem, rangeOfnumberOfItems, rangeOfQuantities, numberOfTrans, outDir, format,
+                broker, queue, topic, ifOutDir);
         return inputValues;
     }
 }
