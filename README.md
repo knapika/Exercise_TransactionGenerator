@@ -22,3 +22,11 @@ docker build --tag generator .
 docker run -v <sciezka do katalogu z plikami .properties i .csv>:/storage -it generator
   
 Przykładowy katalog z wymienionymi danymi znajduje się w repo.
+
+
+BROKER:
+
+java -jar build/libs/Transaction_generator.jar -itemsFile items.csv -customerIds 1:1 -dateRange "2018-03-08T00:0
+0:00.000-0100":"2018-03-08T23:59:59.999-0100" -itemsCount 1:2 -itemsQuantity 1:2  -eventsCount 1  -broker tcp://localhost:61616 -queue transactions-queue -topic transaction-top
+ic
+
